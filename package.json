@@ -3,12 +3,14 @@
   "version": "0.0.2",
   "description": "",
   "main": "index.js",
+  "bin": "./cli.js",
   "config": {
-    "version_path": "[\"body\",{\"$all\":1},\"declaration\",\"declarations\",{\"$all\":1},{\"$eq\":{\"paths\":[\"id\",\"value\"],\"value\":\"version\"}},\"init\"]"
+    "js_version_path": "[\"body\",{\"$all\":1},{\"$eq\":{\"paths\":[\"type\"],\"value\":\"VariableDeclaration\"}},\"declarations\",{\"$all\":1},{\"$eq\":{\"paths\":[\"id\",\"value\"],\"value\":\"version\"}},\"init\"]",
+    "js_version": "version.js"
   },
   "scripts": {
-    "preversion": "node cli.js r version.ts $npm_package_config_version_path \"'$npm_new_version'\" && git add .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preversion": "node cli.js r $npm_package_config_js_version $npm_package_config_js_version_path \"'$npm_new_version'\" && git add .",
+    "test": "node --test"
   },
   "keywords": [],
   "author": "",

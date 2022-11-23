@@ -1,3 +1,7 @@
 # js-rewrite
 
-This is a tool to rewrite chunks of a js files
+A little tool to rewrite JS files. 
+
+### Use js-rewrite to upgrade the version using `npm version`
+
+

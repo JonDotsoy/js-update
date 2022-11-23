@@ -1,8 +1,12 @@
+#!/usr/bin/env node
+
 const { flatten, findOne, findMany } = require("./rewrite");
 const { parse } = require("@swc/core");
 const { argv, cwd } = require("process");
 const { readFile } = require("fs/promises");
 const { readFileSync, writeFileSync } = require("fs");
+const { version } = require("./version")
+const util = require("util")
 
 const inspect = async (fileToInspect, match = '.') => {
     const fileLocation = new URL(fileToInspect, new URL(`${cwd()}/`, 'file://'));
@@ -72,6 +76,10 @@ const replace = async (fileToInspect, relativePathStr, newValue) => {
     }
 }
 
+const versionHandler = () => {
+    console.log(`JS-Rewrite ${version}`)
+}
+
 const main = async () => {
     const [, , command, ...restArgs] = argv;
 
@@ -82,7 +90,7 @@ const main = async () => {
         case "test": return test(...restArgs)
         case 'r':
         case "replace": return replace(...restArgs)
-        default: throw new Error(`Command ${command} not found`)
+        default: versionHandler()
     }
 }
 
